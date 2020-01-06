@@ -25,6 +25,7 @@ namespace OpenGlProject.OpenGlElements.Sets
         /// <param name="gl"></param>
         void PrePaint(OpenGL gl);
         void Add(Vertex2D v);
+        uint BeginType { get; }
     }
 
     /// <summary>
@@ -39,6 +40,8 @@ namespace OpenGlProject.OpenGlElements.Sets
         protected List<T> vertex2Ds = new List<T>();
 
         public void AddVertex(T vertex2D) => vertex2Ds.Add(vertex2D);
+
+        public virtual uint BeginType => OpenGL.GL_LINE_STRIP;
 
         public virtual void PrePaint(OpenGL gl)
         {
@@ -90,4 +93,19 @@ namespace OpenGlProject.OpenGlElements.Sets
     /// EraseSet
     /// </summary>
     public class EraserSet : BrushSet { }
+
+    public class ImageSet : VisualSet<Image>
+    { 
+        //public override uint BeginType => OpenGL.GL_TRIANGLES;
+
+        public override void EndPaint(OpenGL gl)
+        {
+            base.EndPaint(gl);
+        }
+
+        public override void PrePaint(OpenGL gl)
+        {
+            base.PrePaint(gl);
+        }
+    }
 }

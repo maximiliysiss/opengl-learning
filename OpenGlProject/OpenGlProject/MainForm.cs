@@ -110,26 +110,28 @@ namespace OpenGlProject
         private Vertex2D GetNewVertex(MouseEventArgs e)
         {
             Color color = e.Button == MouseButtons.Left ? this.colorsControl.MainColor.ColorEditor : this.colorsControl.ExtendColor.ColorEditor;
-            Vertex2D vertex2D = null;
+            Vertex2D visualPoint = null;
             float oXCoord = ((float)e.X - openGLControl.Width / 2) / (openGLControl.Width / 2);
             float oYCoord = -((float)e.Y - openGLControl.Height / 2) / (openGLControl.Height / 2);
             switch (paintStyle.Value)
             {
                 case PaintStyle.Eraser:
-                    vertex2D = new Eraser(baseColor, oXCoord, oYCoord);
+                    visualPoint = new Eraser(baseColor, oXCoord, oYCoord);
                     break;
                 case PaintStyle.Brush:
-                    vertex2D = new OpenGlElements.Brush(color, oXCoord, oYCoord);
+                    visualPoint = new OpenGlElements.Brush(color, oXCoord, oYCoord);
                     break;
                 case PaintStyle.Pencil:
-                    vertex2D = new Vertex2D(color, oXCoord, oYCoord);
+                    visualPoint = new Vertex2D(color, oXCoord, oYCoord);
                     break;
                 case PaintStyle.Image:
+                    visualPoint = new OpenGlElements.Image(Properties.Resources.fox, openGLControl.OpenGL, oXCoord, oYCoord);
                     break;
                 case PaintStyle.Sign:
+                    visualPoint = new OpenGlElements.Image(Properties.Resources.sign, openGLControl.OpenGL, oXCoord, oYCoord);
                     break;
             }
-            return vertex2D;
+            return visualPoint;
         }
 
         /// <summary>
@@ -161,6 +163,21 @@ namespace OpenGlProject
                 foreach (var layoutIndex in layoutsList.CheckedIndices.Cast<int>())
                     layouts[layoutIndex].AddVertex(vertex2D);
             }
+        }
+
+        private void openGLControl_OpenGLInitialized(object sender, EventArgs e)
+        {
+            //OpenGL gl = openGLControl.OpenGL;
+            //gl.Enable(OpenGL.GL_TEXTURE_2D);
+            //uint[] textureID = new uint[1];
+            //gl.GenTextures(1, textureID);
+            //var byTes = Properties.Resources.fox.ImageToByte();
+            //gl.BindTexture(OpenGL.GL_TEXTURE_2D, textureID[0]);
+            //gl.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, (int)OpenGL.GL_RGBA, 256, 256, 0, OpenGL.GL_RGBA, OpenGL.GL_BYTE, byTes);
+
+            //uint[] array = new uint[] { OpenGL.GL_NEAREST };
+            //gl.TexParameterI(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, array);
+            //gl.TexParameterI(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, array);
         }
     }
 }

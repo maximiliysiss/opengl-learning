@@ -103,6 +103,16 @@ namespace OpenGlProject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fox {
+            get {
+                object obj = ResourceManager.GetObject("fox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap grease_pencil {
             get {
                 object obj = ResourceManager.GetObject("grease-pencil", resourceCulture);
@@ -126,6 +136,16 @@ namespace OpenGlProject.Properties {
         internal static System.Drawing.Bitmap plus_circle_outline {
             get {
                 object obj = ResourceManager.GetObject("plus-circle-outline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sign {
+            get {
+                object obj = ResourceManager.GetObject("sign", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

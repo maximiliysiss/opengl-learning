@@ -46,6 +46,7 @@ namespace OpenGlProject
                     visualSet = new EraserSet();
                     break;
                 case VertexType.Image:
+                    visualSet = new ImageSet();
                     break;
             }
 
@@ -63,7 +64,7 @@ namespace OpenGlProject
             foreach (var vertexSet in vertex2Ds)
             {
                 vertexSet.PrePaint(gl);
-                gl.Begin(OpenGL.GL_LINE_STRIP);
+                gl.Begin(vertexSet.BeginType);
                 vertexSet.Paint(gl);
                 gl.End();
                 vertexSet.EndPaint(gl);
