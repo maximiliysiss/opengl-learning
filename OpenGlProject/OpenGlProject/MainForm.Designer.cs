@@ -33,7 +33,15 @@ namespace OpenGlProject
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рисованиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.кистьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.карандашToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изображениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ластикToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.подписьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.слоиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.фильтрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.brushBtn = new System.Windows.Forms.RadioButton();
             this.pencilBtn = new System.Windows.Forms.RadioButton();
@@ -48,6 +56,7 @@ namespace OpenGlProject
             this.colorsControl = new OpenGlProject.Controls.ColorsControl();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openGLControl = new SharpGL.OpenGLControl();
+            this.инвертироватьЦветаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -60,7 +69,8 @@ namespace OpenGlProject
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.рисованиеToolStripMenuItem,
-            this.слоиToolStripMenuItem});
+            this.слоиToolStripMenuItem,
+            this.фильтрыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -75,15 +85,81 @@ namespace OpenGlProject
             // 
             // рисованиеToolStripMenuItem
             // 
+            this.рисованиеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.кистьToolStripMenuItem,
+            this.карандашToolStripMenuItem,
+            this.изображениеToolStripMenuItem,
+            this.ластикToolStripMenuItem,
+            this.подписьToolStripMenuItem});
             this.рисованиеToolStripMenuItem.Name = "рисованиеToolStripMenuItem";
             this.рисованиеToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.рисованиеToolStripMenuItem.Text = "Рисование";
             // 
+            // кистьToolStripMenuItem
+            // 
+            this.кистьToolStripMenuItem.Name = "кистьToolStripMenuItem";
+            this.кистьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.кистьToolStripMenuItem.Text = "Кисть";
+            this.кистьToolStripMenuItem.Click += new System.EventHandler(this.BrushMenu);
+            // 
+            // карандашToolStripMenuItem
+            // 
+            this.карандашToolStripMenuItem.Name = "карандашToolStripMenuItem";
+            this.карандашToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.карандашToolStripMenuItem.Text = "Карандаш";
+            this.карандашToolStripMenuItem.Click += new System.EventHandler(this.PencilMenu);
+            // 
+            // изображениеToolStripMenuItem
+            // 
+            this.изображениеToolStripMenuItem.Name = "изображениеToolStripMenuItem";
+            this.изображениеToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.изображениеToolStripMenuItem.Text = "Изображение";
+            this.изображениеToolStripMenuItem.Click += new System.EventHandler(this.ImageMenu);
+            // 
+            // ластикToolStripMenuItem
+            // 
+            this.ластикToolStripMenuItem.Name = "ластикToolStripMenuItem";
+            this.ластикToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.ластикToolStripMenuItem.Text = "Ластик";
+            this.ластикToolStripMenuItem.Click += new System.EventHandler(this.EraserMenu);
+            // 
+            // подписьToolStripMenuItem
+            // 
+            this.подписьToolStripMenuItem.Name = "подписьToolStripMenuItem";
+            this.подписьToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.подписьToolStripMenuItem.Text = "Подпись";
+            this.подписьToolStripMenuItem.Click += new System.EventHandler(this.SignMenu);
+            // 
             // слоиToolStripMenuItem
             // 
+            this.слоиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьToolStripMenuItem,
+            this.удалитьToolStripMenuItem});
             this.слоиToolStripMenuItem.Name = "слоиToolStripMenuItem";
             this.слоиToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.слоиToolStripMenuItem.Text = "Слои";
+            // 
+            // добавитьToolStripMenuItem
+            // 
+            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.добавитьToolStripMenuItem.Text = "Добавить";
+            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.AddLayoutMenu);
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.удалитьToolStripMenuItem.Text = "Удалить";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.RemoveLayoutMenu);
+            // 
+            // фильтрыToolStripMenuItem
+            // 
+            this.фильтрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.инвертироватьЦветаToolStripMenuItem});
+            this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
+            this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.фильтрыToolStripMenuItem.Text = "Фильтры";
             // 
             // flowLayoutPanel1
             // 
@@ -219,11 +295,17 @@ namespace OpenGlProject
             this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
             this.openGLControl.Size = new System.Drawing.Size(550, 550);
             this.openGLControl.TabIndex = 3;
-            this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.OpenGLControl_OpenGLDraw);
             this.openGLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseDown);
             this.openGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseMove);
             this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
+            // 
+            // инвертироватьЦветаToolStripMenuItem
+            // 
+            this.инвертироватьЦветаToolStripMenuItem.Name = "инвертироватьЦветаToolStripMenuItem";
+            this.инвертироватьЦветаToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.инвертироватьЦветаToolStripMenuItem.Text = "Инвертировать цвета";
+            this.инвертироватьЦветаToolStripMenuItem.Click += new System.EventHandler(this.InvertFilterMenu);
             // 
             // MainForm
             // 
@@ -271,6 +353,15 @@ namespace OpenGlProject
         private System.Windows.Forms.RadioButton imageBtn;
         private System.Windows.Forms.RadioButton eraserBtn;
         private System.Windows.Forms.RadioButton signBtn;
+        private System.Windows.Forms.ToolStripMenuItem кистьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem карандашToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изображениеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ластикToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem подписьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem фильтрыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem инвертироватьЦветаToolStripMenuItem;
     }
 }
 

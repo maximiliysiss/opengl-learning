@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using OpenGlProject.Filters;
+using SharpGL;
+using System.Drawing;
 
 namespace OpenGlProject.OpenGlElements
 {
@@ -14,5 +16,7 @@ namespace OpenGlProject.OpenGlElements
         }
 
         public override VertexType VertexType => VertexType.Eraser;
+
+        public override void Filter(IFilter filter, OpenGL openGL) { }
     }
 }

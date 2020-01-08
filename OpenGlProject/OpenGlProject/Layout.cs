@@ -15,6 +15,7 @@ namespace OpenGlProject
         /// Sets
         /// </summary>
         private readonly List<IVisualSet> vertex2Ds = new List<IVisualSet>();
+        public List<IFilterAccess> FilterAccesses => vertex2Ds.SelectMany(x => x.Elements).OfType<IFilterAccess>().ToList();
 
         public Layout(int index)
         {

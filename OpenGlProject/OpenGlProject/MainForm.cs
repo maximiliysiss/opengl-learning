@@ -1,4 +1,5 @@
-﻿using OpenGlProject.OpenGlElements;
+﻿using OpenGlProject.Filters;
+using OpenGlProject.OpenGlElements;
 using SharpGL;
 using System;
 using System.Collections.Generic;
@@ -29,10 +30,12 @@ namespace OpenGlProject
         /// Is mouse paint?
         /// </summary>
         private bool isPaint = false;
+        private IFilter currentFilter = null;
 
         public MainForm()
         {
             InitializeComponent();
+            this.Name = this.Text = "Zimin_Maxim_PRI_116_Lab_07";
             this.openGLControl.DrawFPS = true;
             // Main layout is checked on start
             layoutsList.SetItemChecked(0, true);
@@ -72,6 +75,11 @@ namespace OpenGlProject
         {
             OpenGL gl = this.openGLControl.OpenGL;
 
+            var layoutIndex = layoutsList.CheckedIndices.Cast<int>().ToList();
+            var layoutsReal = layouts.Where((x, i) => layoutIndex.Contains(i)).ToList();
+
+            currentFilter?.DrawFilter(gl, layoutsReal);
+
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.ClearColor(baseColor.R, baseColor.G, baseColor.B, baseColor.A);
             gl.LoadIdentity();
@@ -79,8 +87,8 @@ namespace OpenGlProject
 
             gl.Translate(0.0f, 0.0f, -2.4f);
 
-            foreach (var checkIndex in layoutsList.CheckedIndices.Cast<int>())
-                layouts[checkIndex].Paint(gl);
+            foreach (var layout in layoutsReal)
+                layout.Paint(gl);
         }
 
         // Select instrument
@@ -165,19 +173,31 @@ namespace OpenGlProject
             }
         }
 
-        private void openGLControl_OpenGLInitialized(object sender, EventArgs e)
+        private void ApplyFilter(IFilter filter)
         {
-            //OpenGL gl = openGLControl.OpenGL;
-            //gl.Enable(OpenGL.GL_TEXTURE_2D);
-            //uint[] textureID = new uint[1];
-            //gl.GenTextures(1, textureID);
-            //var byTes = Properties.Resources.fox.ImageToByte();
-            //gl.BindTexture(OpenGL.GL_TEXTURE_2D, textureID[0]);
-            //gl.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, (int)OpenGL.GL_RGBA, 256, 256, 0, OpenGL.GL_RGBA, OpenGL.GL_BYTE, byTes);
+            if (this.currentFilter?.GetType() == filter.GetType())
+                this.currentFilter = new EmptyFilter();
+            else
+                this.currentFilter = filter;
 
-            //uint[] array = new uint[] { OpenGL.GL_NEAREST };
-            //gl.TexParameterI(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, array);
-            //gl.TexParameterI(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, array);
+
+            currentFilter.OpenGL = openGLControl.OpenGL;
         }
+
+        private void BrushMenu(object sender, EventArgs e) => brushBtn.Checked = true;
+
+        private void PencilMenu(object sender, EventArgs e) => pencilBtn.Checked = true;
+
+        private void ImageMenu(object sender, EventArgs e) => imageBtn.Checked = true;
+
+        private void EraserMenu(object sender, EventArgs e) => eraserBtn.Checked = true;
+
+        private void SignMenu(object sender, EventArgs e) => signBtn.Checked = true;
+
+        private void AddLayoutMenu(object sender, EventArgs e) => AddLayout(null, null);
+
+        private void RemoveLayoutMenu(object sender, EventArgs e) => RemoveLayout(null, null);
+
+        private void InvertFilterMenu(object sender, EventArgs e) => ApplyFilter(new InvertFilter(openGLControl.OpenGL));
     }
 }

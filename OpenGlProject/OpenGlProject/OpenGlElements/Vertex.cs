@@ -1,8 +1,14 @@
-﻿using SharpGL;
+﻿using OpenGlProject.Filters;
+using SharpGL;
 using System.Drawing;
 
 namespace OpenGlProject.OpenGlElements
 {
+    public interface IFilterAccess
+    {
+        void Filter(IFilter filter, OpenGL openGL);
+    }
+
     /// <summary>
     /// Type
     /// </summary>
@@ -17,7 +23,7 @@ namespace OpenGlProject.OpenGlElements
     /// <summary>
     /// Base class for Vertex
     /// </summary>
-    public class Vertex2D
+    public class Vertex2D : IFilterAccess
     {
         public virtual VertexType VertexType => VertexType.Vertex;
 
@@ -33,11 +39,12 @@ namespace OpenGlProject.OpenGlElements
 
         public Vertex2D(Color color, float x, float y)
         {
-            Color = color;
+            Color = PaintColor = color;
             X = x;
             Y = y;
         }
 
+        public Color PaintColor { get; set; }
         public Color Color { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
@@ -49,6 +56,11 @@ namespace OpenGlProject.OpenGlElements
             gl.Color(Color.R, Color.G, Color.B, Color.A);
             gl.Vertex(Coords);
         }
+
+        public virtual void PrePaint(OpenGL openGL) { }
+        public virtual void EndPaint(OpenGL openGL) { }
+
+        public virtual void Filter(IFilter filter, OpenGL openGL) => Color = filter?.Filter(PaintColor) ?? PaintColor;
     }
 
     public class Vertex3D : Vertex2D
