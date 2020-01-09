@@ -1,4 +1,5 @@
-﻿using SharpGL;
+﻿using OpenGlProject.Algorithm;
+using SharpGL;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,7 +41,7 @@ namespace OpenGlProject.OpenGlElements.Sets
         /// </summary>
         protected List<T> vertex2Ds = new List<T>();
 
-        public void AddVertex(T vertex2D) => vertex2Ds.Add(vertex2D);
+        public virtual void AddVertex(T vertex2D) => vertex2Ds.Add(vertex2D);
 
         public virtual uint BeginType => OpenGL.GL_LINE_STRIP;
 
@@ -60,7 +61,7 @@ namespace OpenGlProject.OpenGlElements.Sets
                 v.Paint(gl);
         }
 
-        public void Add(Vertex2D v) => AddVertex((T)v);
+        public virtual void Add(Vertex2D v) => AddVertex((T)v);
     }
 
     /// <summary>
@@ -115,6 +116,35 @@ namespace OpenGlProject.OpenGlElements.Sets
             gl.Color(1.0, 1.0, 1.0, 1.0);
             foreach (var img in vertex2Ds)
                 img.PrePaint(gl);
+        }
+    }
+
+    public class SplineSet : VisualSet<Spline>
+    {
+        private readonly float size = 0.03f;
+        private readonly List<Spline> points = new List<Spline>();
+
+        public override void AddVertex(Spline vertex2D)
+        {
+            points.Add(vertex2D);
+            vertex2Ds.Clear();
+            vertex2Ds = new BezierSpline(points).GenerateSpline(50);
+        }
+
+        public override void EndPaint(OpenGL gl)
+        {
+            foreach (var p in points)
+            {
+                var startX = p.X - size / 2;
+                var startY = p.Y - size / 2;
+                gl.Begin(OpenGL.GL_LINE_STRIP);
+                gl.Vertex(new[] { startX, startY });
+                gl.Vertex(new[] { startX + size, startY });
+                gl.Vertex(new[] { startX + size, startY + size });
+                gl.Vertex(new[] { startX, startY + size });
+                gl.Vertex(new[] { startX, startY });
+                gl.End();
+            }
         }
     }
 }

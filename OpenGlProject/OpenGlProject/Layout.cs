@@ -22,12 +22,18 @@ namespace OpenGlProject
             Index = index;
         }
 
+        public bool IsInstrumentChanged { get; set; }
+
         public int Index { get; set; }
         /// <summary>
         /// Add vertex to last layout's set
         /// </summary>
         /// <param name="vertex2D"></param>
-        public void AddVertex(Vertex2D vertex2D) => this.vertex2Ds.Last().Add(vertex2D);
+        public void AddVertex(Vertex2D vertex2D)
+        {
+            if (vertex2D.VertexType != VertexType.Spline)
+                this.vertex2Ds.Last().Add(vertex2D);
+        }
         /// <summary>
         /// Add new layout's set and add vertex to one
         /// </summary>
@@ -48,6 +54,10 @@ namespace OpenGlProject
                     break;
                 case VertexType.Image:
                     visualSet = new ImageSet();
+                    break;
+                case VertexType.Spline:
+                    visualSet = IsInstrumentChanged ? new SplineSet() : vertex2Ds.Last(x => x is SplineSet);
+                    IsInstrumentChanged = false;
                     break;
             }
 

@@ -39,6 +39,9 @@ namespace OpenGlProject
             this.openGLControl.DrawFPS = true;
             // Main layout is checked on start
             layoutsList.SetItemChecked(0, true);
+
+            splineBtn.CheckedChanged += (s, e) => layouts.ForEach(x => x.IsInstrumentChanged = true);
+            layoutsList.ItemCheck += (s, e) => layouts.ForEach(x => x.IsInstrumentChanged = true);
         }
 
         /// <summary>
@@ -140,6 +143,9 @@ namespace OpenGlProject
                 case PaintStyle.Sign:
                     visualPoint = new OpenGlElements.Image(Properties.Resources.sign, openGLControl.OpenGL, oXCoord, oYCoord);
                     break;
+                case PaintStyle.Spline:
+                    visualPoint = new Spline(color, oXCoord, oYCoord);
+                    break;
             }
             return visualPoint;
         }
@@ -200,5 +206,7 @@ namespace OpenGlProject
         private void InvertFilterMenu(object sender, EventArgs e) => ApplyFilter(new InvertFilter());
 
         private void SharpnessFilterMenu(object sender, EventArgs e) { }/* => ApplyFilter(new SharpnessFilter());*/
+
+        private void SplineBtn_Checked(object sender, EventArgs e) => paintStyle = PaintStyle.Spline;
     }
 }

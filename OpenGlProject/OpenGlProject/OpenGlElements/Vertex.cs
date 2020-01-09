@@ -18,6 +18,7 @@ namespace OpenGlProject.OpenGlElements
         Brush,
         Image,
         Eraser,
+        Spline
     }
 
     /// <summary>
