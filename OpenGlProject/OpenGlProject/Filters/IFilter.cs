@@ -7,30 +7,32 @@ namespace OpenGlProject.Filters
 {
     public interface IFilter
     {
-        void DrawFilter(OpenGL gl, List<Layout> layouts);
+        void DrawFilter(OpenGLControl gl, List<Layout> layouts);
         Color Filter(Color color);
         Bitmap Filter(Bitmap bitmap);
-        OpenGL OpenGL { get; set; }
+        void PostDrawFilter(OpenGLControl gl);
     }
 
     public class EmptyFilter : IFilter
     {
-        public OpenGL OpenGL { get; set; }
-
         public Color Filter(Color color)
         {
             throw new NotImplementedException();
         }
 
-        public void DrawFilter(OpenGL gl, List<Layout> layouts)
+        public void DrawFilter(OpenGLControl gl, List<Layout> layouts)
         {
             foreach (var layout in layouts)
-                layout.FilterAccesses.ForEach(x => x.Filter(null, this.OpenGL));
+                layout.FilterAccesses.ForEach(x => x.Filter(null, gl.OpenGL));
         }
 
         public Bitmap Filter(Bitmap color)
         {
             throw new NotImplementedException();
+        }
+
+        public void PostDrawFilter(OpenGLControl gl)
+        {
         }
     }
 }

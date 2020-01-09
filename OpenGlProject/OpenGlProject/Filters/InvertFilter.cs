@@ -5,10 +5,6 @@ namespace OpenGlProject.Filters
 {
     public class InvertFilter : BasePixelFilter
     {
-        public InvertFilter(OpenGL openGL) : base(openGL)
-        {
-        }
-
         public override Color Filter(Color color) => Color.FromArgb(color.ToArgb() ^ 0xffffff);
 
         public override Bitmap Filter(Bitmap bitmap)

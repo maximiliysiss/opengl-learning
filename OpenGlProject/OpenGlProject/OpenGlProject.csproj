@@ -84,6 +84,7 @@
     <Compile Include="Filters\EmptyFilter.cs" />
     <Compile Include="Filters\IFilter.cs" />
     <Compile Include="Filters\InvertFilter.cs" />
+    <Compile Include="Filters\SharpnessFilter.cs" />
     <Compile Include="OpenGlElements\Brush.cs" />
     <Compile Include="OpenGlElements\Eraser.cs" />
     <Compile Include="OpenGlElements\Image.cs" />

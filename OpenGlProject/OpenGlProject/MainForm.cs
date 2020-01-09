@@ -78,7 +78,7 @@ namespace OpenGlProject
             var layoutIndex = layoutsList.CheckedIndices.Cast<int>().ToList();
             var layoutsReal = layouts.Where((x, i) => layoutIndex.Contains(i)).ToList();
 
-            currentFilter?.DrawFilter(gl, layoutsReal);
+            currentFilter?.DrawFilter(openGLControl, layoutsReal);
 
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.ClearColor(baseColor.R, baseColor.G, baseColor.B, baseColor.A);
@@ -89,6 +89,8 @@ namespace OpenGlProject
 
             foreach (var layout in layoutsReal)
                 layout.Paint(gl);
+
+            currentFilter?.PostDrawFilter(openGLControl);
         }
 
         // Select instrument
@@ -179,9 +181,6 @@ namespace OpenGlProject
                 this.currentFilter = new EmptyFilter();
             else
                 this.currentFilter = filter;
-
-
-            currentFilter.OpenGL = openGLControl.OpenGL;
         }
 
         private void BrushMenu(object sender, EventArgs e) => brushBtn.Checked = true;
@@ -198,6 +197,8 @@ namespace OpenGlProject
 
         private void RemoveLayoutMenu(object sender, EventArgs e) => RemoveLayout(null, null);
 
-        private void InvertFilterMenu(object sender, EventArgs e) => ApplyFilter(new InvertFilter(openGLControl.OpenGL));
+        private void InvertFilterMenu(object sender, EventArgs e) => ApplyFilter(new InvertFilter());
+
+        private void SharpnessFilterMenu(object sender, EventArgs e) => ApplyFilter(new SharpnessFilter());
     }
 }

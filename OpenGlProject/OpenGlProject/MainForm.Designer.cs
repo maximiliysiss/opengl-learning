@@ -57,6 +57,7 @@ namespace OpenGlProject
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openGLControl = new SharpGL.OpenGLControl();
             this.инвертироватьЦветаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.увеличитьРезкостьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -156,7 +157,8 @@ namespace OpenGlProject
             // фильтрыToolStripMenuItem
             // 
             this.фильтрыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.инвертироватьЦветаToolStripMenuItem});
+            this.инвертироватьЦветаToolStripMenuItem,
+            this.увеличитьРезкостьToolStripMenuItem});
             this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.фильтрыToolStripMenuItem.Text = "Фильтры";
@@ -307,6 +309,13 @@ namespace OpenGlProject
             this.инвертироватьЦветаToolStripMenuItem.Text = "Инвертировать цвета";
             this.инвертироватьЦветаToolStripMenuItem.Click += new System.EventHandler(this.InvertFilterMenu);
             // 
+            // увеличитьРезкостьToolStripMenuItem
+            // 
+            this.увеличитьРезкостьToolStripMenuItem.Name = "увеличитьРезкостьToolStripMenuItem";
+            this.увеличитьРезкостьToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.увеличитьРезкостьToolStripMenuItem.Text = "Увеличить резкость";
+            this.увеличитьРезкостьToolStripMenuItem.Click += new System.EventHandler(this.SharpnessFilterMenu);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,6 +371,7 @@ namespace OpenGlProject
         private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem фильтрыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem инвертироватьЦветаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem увеличитьРезкостьToolStripMenuItem;
     }
 }
 
