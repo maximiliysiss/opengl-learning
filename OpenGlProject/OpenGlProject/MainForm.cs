@@ -199,6 +199,6 @@ namespace OpenGlProject
 
         private void InvertFilterMenu(object sender, EventArgs e) => ApplyFilter(new InvertFilter());
 
-        private void SharpnessFilterMenu(object sender, EventArgs e) => ApplyFilter(new SharpnessFilter());
+        private void SharpnessFilterMenu(object sender, EventArgs e) { }/* => ApplyFilter(new SharpnessFilter());*/
     }
 }
