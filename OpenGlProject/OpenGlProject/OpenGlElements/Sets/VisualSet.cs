@@ -1,5 +1,8 @@
-﻿using SharpGL;
+﻿using OpenGlProject.Algorithm;
+using SharpGL;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace OpenGlProject.OpenGlElements.Sets
@@ -18,7 +21,7 @@ namespace OpenGlProject.OpenGlElements.Sets
         /// Recover data
         /// </summary>
         /// <param name="gl"></param>
-        void EndPaint(OpenGL gl);
+        void EndPaint(OpenGLControl gl);
         /// <summary>
         /// Set some data for set
         /// </summary>
@@ -40,7 +43,7 @@ namespace OpenGlProject.OpenGlElements.Sets
         /// </summary>
         protected List<T> vertex2Ds = new List<T>();
 
-        public void AddVertex(T vertex2D) => vertex2Ds.Add(vertex2D);
+        public virtual void AddVertex(T vertex2D) => vertex2Ds.Add(vertex2D);
 
         public virtual uint BeginType => OpenGL.GL_LINE_STRIP;
 
@@ -50,7 +53,7 @@ namespace OpenGlProject.OpenGlElements.Sets
         {
         }
 
-        public virtual void EndPaint(OpenGL gl)
+        public virtual void EndPaint(OpenGLControl gl)
         {
         }
 
@@ -60,7 +63,7 @@ namespace OpenGlProject.OpenGlElements.Sets
                 v.Paint(gl);
         }
 
-        public void Add(Vertex2D v) => AddVertex((T)v);
+        public virtual void Add(Vertex2D v) => AddVertex((T)v);
     }
 
     /// <summary>
@@ -81,7 +84,7 @@ namespace OpenGlProject.OpenGlElements.Sets
         /// </summary>
         public float widthSet;
 
-        public override void EndPaint(OpenGL gl) => gl.LineWidth(widthSet);
+        public override void EndPaint(OpenGLControl gl) => gl.OpenGL.LineWidth(widthSet);
 
         public override void PrePaint(OpenGL gl)
         {
@@ -102,10 +105,10 @@ namespace OpenGlProject.OpenGlElements.Sets
         float[] color = new float[4];
         public override uint BeginType => OpenGL.GL_QUADS;
 
-        public override void EndPaint(OpenGL gl)
+        public override void EndPaint(OpenGLControl gl)
         {
-            gl.Color(color[0], color[1], color[2], color[3]);
-            gl.Disable(OpenGL.GL_TEXTURE_2D);
+            gl.OpenGL.Color(color[0], color[1], color[2], color[3]);
+            gl.OpenGL.Disable(OpenGL.GL_TEXTURE_2D);
         }
 
         public override void PrePaint(OpenGL gl)
@@ -115,6 +118,36 @@ namespace OpenGlProject.OpenGlElements.Sets
             gl.Color(1.0, 1.0, 1.0, 1.0);
             foreach (var img in vertex2Ds)
                 img.PrePaint(gl);
+        }
+    }
+
+    public class SplineSet : VisualSet<Spline>
+    {
+        private readonly float size = 0.03f;
+        private readonly List<Spline> points = new List<Spline>();
+
+        public override void AddVertex(Spline vertex2D)
+        {
+            points.Add(vertex2D);
+            vertex2Ds.Clear();
+            vertex2Ds = new BezierSpline(points).GenerateSpline(50);
+        }
+
+        public override void EndPaint(OpenGLControl gl)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                var p = points[i];
+                var startX = p.X - size / 2;
+                var startY = p.Y - size / 2;
+                gl.OpenGL.Begin(OpenGL.GL_LINE_STRIP);
+                gl.OpenGL.Vertex(new[] { startX, startY });
+                gl.OpenGL.Vertex(new[] { startX + size, startY });
+                gl.OpenGL.Vertex(new[] { startX + size, startY + size });
+                gl.OpenGL.Vertex(new[] { startX, startY + size });
+                gl.OpenGL.Vertex(new[] { startX, startY });
+                gl.OpenGL.End();
+            }
         }
     }
 }

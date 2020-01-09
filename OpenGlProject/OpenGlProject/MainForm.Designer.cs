@@ -42,6 +42,8 @@ namespace OpenGlProject
             this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.фильтрыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.инвертироватьЦветаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.увеличитьРезкостьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.brushBtn = new System.Windows.Forms.RadioButton();
             this.pencilBtn = new System.Windows.Forms.RadioButton();
@@ -56,8 +58,7 @@ namespace OpenGlProject
             this.colorsControl = new OpenGlProject.Controls.ColorsControl();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openGLControl = new SharpGL.OpenGLControl();
-            this.инвертироватьЦветаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.увеличитьРезкостьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splineBtn = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -163,6 +164,20 @@ namespace OpenGlProject
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.фильтрыToolStripMenuItem.Text = "Фильтры";
             // 
+            // инвертироватьЦветаToolStripMenuItem
+            // 
+            this.инвертироватьЦветаToolStripMenuItem.Name = "инвертироватьЦветаToolStripMenuItem";
+            this.инвертироватьЦветаToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.инвертироватьЦветаToolStripMenuItem.Text = "Инвертировать цвета";
+            this.инвертироватьЦветаToolStripMenuItem.Click += new System.EventHandler(this.InvertFilterMenu);
+            // 
+            // увеличитьРезкостьToolStripMenuItem
+            // 
+            this.увеличитьРезкостьToolStripMenuItem.Name = "увеличитьРезкостьToolStripMenuItem";
+            this.увеличитьРезкостьToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.увеличитьРезкостьToolStripMenuItem.Text = "Увеличить резкость";
+            this.увеличитьРезкостьToolStripMenuItem.Click += new System.EventHandler(this.SharpnessFilterMenu);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.brushBtn);
@@ -170,6 +185,7 @@ namespace OpenGlProject
             this.flowLayoutPanel1.Controls.Add(this.imageBtn);
             this.flowLayoutPanel1.Controls.Add(this.eraserBtn);
             this.flowLayoutPanel1.Controls.Add(this.signBtn);
+            this.flowLayoutPanel1.Controls.Add(this.splineBtn);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 27);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(54, 550);
@@ -302,19 +318,16 @@ namespace OpenGlProject
             this.openGLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseMove);
             this.openGLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.openGLControl_MouseUp);
             // 
-            // инвертироватьЦветаToolStripMenuItem
+            // radioButton1
             // 
-            this.инвертироватьЦветаToolStripMenuItem.Name = "инвертироватьЦветаToolStripMenuItem";
-            this.инвертироватьЦветаToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.инвертироватьЦветаToolStripMenuItem.Text = "Инвертировать цвета";
-            this.инвертироватьЦветаToolStripMenuItem.Click += new System.EventHandler(this.InvertFilterMenu);
-            // 
-            // увеличитьРезкостьToolStripMenuItem
-            // 
-            this.увеличитьРезкостьToolStripMenuItem.Name = "увеличитьРезкостьToolStripMenuItem";
-            this.увеличитьРезкостьToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.увеличитьРезкостьToolStripMenuItem.Text = "Увеличить резкость";
-            this.увеличитьРезкостьToolStripMenuItem.Click += new System.EventHandler(this.SharpnessFilterMenu);
+            this.splineBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.splineBtn.BackgroundImage = global::OpenGlProject.Properties.Resources.chart_areaspline;
+            this.splineBtn.Location = new System.Drawing.Point(3, 273);
+            this.splineBtn.Name = "radioButton1";
+            this.splineBtn.Size = new System.Drawing.Size(48, 48);
+            this.splineBtn.TabIndex = 5;
+            this.splineBtn.UseVisualStyleBackColor = true;
+            this.splineBtn.CheckedChanged += new System.EventHandler(this.SplineBtn_Checked);
             // 
             // MainForm
             // 
@@ -372,6 +385,7 @@ namespace OpenGlProject
         private System.Windows.Forms.ToolStripMenuItem фильтрыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem инвертироватьЦветаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem увеличитьРезкостьToolStripMenuItem;
+        private System.Windows.Forms.RadioButton splineBtn;
     }
 }
 

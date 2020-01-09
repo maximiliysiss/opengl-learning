@@ -22,12 +22,18 @@ namespace OpenGlProject
             Index = index;
         }
 
+        public bool IsInstrumentChanged { get; set; }
+
         public int Index { get; set; }
         /// <summary>
         /// Add vertex to last layout's set
         /// </summary>
         /// <param name="vertex2D"></param>
-        public void AddVertex(Vertex2D vertex2D) => this.vertex2Ds.Last().Add(vertex2D);
+        public void AddVertex(Vertex2D vertex2D)
+        {
+            if (vertex2D.VertexType != VertexType.Spline)
+                this.vertex2Ds.Last().Add(vertex2D);
+        }
         /// <summary>
         /// Add new layout's set and add vertex to one
         /// </summary>
@@ -49,6 +55,10 @@ namespace OpenGlProject
                 case VertexType.Image:
                     visualSet = new ImageSet();
                     break;
+                case VertexType.Spline:
+                    visualSet = IsInstrumentChanged ? new SplineSet() : vertex2Ds.Last(x => x is SplineSet);
+                    IsInstrumentChanged = false;
+                    break;
             }
 
             visualSet?.Add(vertex2D);
@@ -60,16 +70,18 @@ namespace OpenGlProject
         /// Paint all active sets
         /// </summary>
         /// <param name="gl"></param>
-        public void Paint(OpenGL gl)
+        public void Paint(OpenGLControl gl)
         {
             foreach (var vertexSet in vertex2Ds)
             {
-                vertexSet.PrePaint(gl);
-                gl.Begin(vertexSet.BeginType);
-                vertexSet.Paint(gl);
-                gl.End();
+                vertexSet.PrePaint(gl.OpenGL);
+                gl.OpenGL.Begin(vertexSet.BeginType);
+                vertexSet.Paint(gl.OpenGL);
+                gl.OpenGL.End();
                 vertexSet.EndPaint(gl);
             }
+
+            gl.OpenGL.Flush();
         }
     }
 }

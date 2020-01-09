@@ -9,6 +9,7 @@
         Pencil,
         Image,
         Eraser,
-        Sign
+        Sign,
+        Spline
     }
 }
