@@ -35,8 +35,10 @@ namespace OpenGlProject
         public MainForm()
         {
             InitializeComponent();
-            this.Name = this.Text = "Zimin_Maxim_PRI_116_Lab_07";
+            this.Name = this.Text = "Zimin_Maxim_PRI_116_Lab_08";
+#if DEBUG
             this.openGLControl.DrawFPS = true;
+#endif
             // Main layout is checked on start
             layoutsList.SetItemChecked(0, true);
 
@@ -91,7 +93,7 @@ namespace OpenGlProject
             gl.Translate(0.0f, 0.0f, -2.4f);
 
             foreach (var layout in layoutsReal)
-                layout.Paint(gl);
+                layout.Paint(openGLControl);
 
             currentFilter?.PostDrawFilter(openGLControl);
         }

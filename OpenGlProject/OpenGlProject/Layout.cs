@@ -70,16 +70,18 @@ namespace OpenGlProject
         /// Paint all active sets
         /// </summary>
         /// <param name="gl"></param>
-        public void Paint(OpenGL gl)
+        public void Paint(OpenGLControl gl)
         {
             foreach (var vertexSet in vertex2Ds)
             {
-                vertexSet.PrePaint(gl);
-                gl.Begin(vertexSet.BeginType);
-                vertexSet.Paint(gl);
-                gl.End();
+                vertexSet.PrePaint(gl.OpenGL);
+                gl.OpenGL.Begin(vertexSet.BeginType);
+                vertexSet.Paint(gl.OpenGL);
+                gl.OpenGL.End();
                 vertexSet.EndPaint(gl);
             }
+
+            gl.OpenGL.Flush();
         }
     }
 }
