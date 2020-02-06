@@ -89,10 +89,10 @@ namespace FractalOpenGL
         {
             int width = bitmap.Width;
 
-            double xmin = -3;
-            double ymin = -2;
-            double xmax = 1;
-            double ymax = 2;
+            double xmin = -1.5;
+            double ymin = -1.2;
+            double xmax = 1.5;
+            double ymax = 1.5;
 
             int W = 600;
             int H = 600;
@@ -102,7 +102,6 @@ namespace FractalOpenGL
 
             double x, y, X, Y, Cx, Cy;
 
-            // циклы по всем пикселям результирующего изображения
             for (int ax = fromHeight; ax < toHeight; ax++)
             {
 
