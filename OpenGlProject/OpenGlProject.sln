@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenGlProject", "OpenGlProject\OpenGlProject.csproj", "{7C9EB782-0264-4A24-8B5D-A0A70FB08E50}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalOpenGL", "FractalOpenGL\FractalOpenGL.csproj", "{0B5344EA-BE16-4B56-9E9D-1879AFEBD2A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7C9EB782-0264-4A24-8B5D-A0A70FB08E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C9EB782-0264-4A24-8B5D-A0A70FB08E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C9EB782-0264-4A24-8B5D-A0A70FB08E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B5344EA-BE16-4B56-9E9D-1879AFEBD2A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B5344EA-BE16-4B56-9E9D-1879AFEBD2A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B5344EA-BE16-4B56-9E9D-1879AFEBD2A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B5344EA-BE16-4B56-9E9D-1879AFEBD2A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
