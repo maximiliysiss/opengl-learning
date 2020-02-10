@@ -69,10 +69,9 @@ namespace FractalOpenGL
             gl.Flush();
         }
 
-        private void DrawClick(object sender, System.EventArgs e)
+        private async void DrawClick(object sender, System.EventArgs e)
         {
             currentFractal?.Dispose();
-
             currentFractal = new Bitmap(openGLControl.Width, openGLControl.Height);
 
             List<Task> tasks = new List<Task>();
@@ -82,7 +81,7 @@ namespace FractalOpenGL
                 tasks.Add(CalculateBitmapPart(currentFractal, currentFractal.Height / count * i,
                     currentFractal.Height / count * (i + 1), drawMode));
             }
-            Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
         }
 
         private async Task CalculateBitmapPart(Bitmap bitmap, int fromHeight, int toHeight, Additional.DrawMode drawMode)
