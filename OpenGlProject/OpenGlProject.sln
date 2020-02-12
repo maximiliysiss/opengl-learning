@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalOpenGL", "FractalOpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotateOpenGL", "RotateOpenGL\RotateOpenGL.csproj", "{4794645B-4E75-48BD-A6ED-878AD8684C2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorOpenGl", "EditorOpenGl\EditorOpenGl.csproj", "{955D44EA-FA14-4D66-9AC4-CAC9EF8E4031}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4794645B-4E75-48BD-A6ED-878AD8684C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4794645B-4E75-48BD-A6ED-878AD8684C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4794645B-4E75-48BD-A6ED-878AD8684C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955D44EA-FA14-4D66-9AC4-CAC9EF8E4031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955D44EA-FA14-4D66-9AC4-CAC9EF8E4031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955D44EA-FA14-4D66-9AC4-CAC9EF8E4031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955D44EA-FA14-4D66-9AC4-CAC9EF8E4031}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
