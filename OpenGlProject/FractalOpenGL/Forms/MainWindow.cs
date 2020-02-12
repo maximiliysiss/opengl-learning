@@ -92,6 +92,7 @@ namespace FractalOpenGL
             double ymin = -1.2;
             double xmax = 1.5;
             double ymax = 1.5;
+            double p = 0.32, q = 0.04;
 
             int W = 600;
             int H = 600;
@@ -124,8 +125,8 @@ namespace FractalOpenGL
                                 iy = 2 * X * Y + Cy;
                                 break;
                             case Additional.DrawMode.Custom:
-                                ix = X * X - Y * Y + drawMode.ToValue();
-                                iy = 2 * X * Y + drawMode.ToValue(1);
+                                ix = X * X - Y * Y - p * p * p + 3 * p * q;
+                                iy = 2 * X * Y - 3 * q * p * p + p * p * p;
                                 break;
                         }
                         n++;
