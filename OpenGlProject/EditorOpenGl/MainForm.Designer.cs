@@ -28,44 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.openGLControl = new SharpGL.OpenGLControl();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.objectsComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
+            this.checkBox = new System.Windows.Forms.CheckBox();
+            this.oxScroll = new System.Windows.Forms.TrackBar();
+            this.zoomScroll = new System.Windows.Forms.TrackBar();
+            this.angleScroll = new System.Windows.Forms.TrackBar();
+            this.ozScroll = new System.Windows.Forms.TrackBar();
+            this.oyScroll = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.openGLControl = new SharpGL.OpenGLControl();
+            ((System.ComponentModel.ISupportInitialize)(this.oxScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.angleScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ozScroll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oyScroll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             this.SuspendLayout();
-            // 
-            // openGLControl
-            // 
-            this.openGLControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.openGLControl.DrawFPS = false;
-            this.openGLControl.Location = new System.Drawing.Point(12, 12);
-            this.openGLControl.Name = "openGLControl";
-            this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
-            this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
-            this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
-            this.openGLControl.Size = new System.Drawing.Size(643, 457);
-            this.openGLControl.TabIndex = 0;
-            this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl1_OpenGLDraw);
             // 
             // label1
             // 
@@ -88,15 +73,16 @@
             this.comboBox1.Size = new System.Drawing.Size(163, 21);
             this.comboBox1.TabIndex = 2;
             // 
-            // comboBox2
+            // objectsComboBox
             // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.objectsComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(661, 80);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(164, 21);
-            this.comboBox2.TabIndex = 4;
+            this.objectsComboBox.FormattingEnabled = true;
+            this.objectsComboBox.Location = new System.Drawing.Point(661, 80);
+            this.objectsComboBox.Name = "objectsComboBox";
+            this.objectsComboBox.Size = new System.Drawing.Size(164, 21);
+            this.objectsComboBox.TabIndex = 4;
+            this.objectsComboBox.SelectedIndexChanged += new System.EventHandler(this.objectsComboBox_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -111,75 +97,80 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.checkBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(661, 108);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(75, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Сеточный";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox.AutoSize = true;
+            this.checkBox.Location = new System.Drawing.Point(661, 108);
+            this.checkBox.Name = "checkBox1";
+            this.checkBox.Size = new System.Drawing.Size(75, 17);
+            this.checkBox.TabIndex = 5;
+            this.checkBox.Text = "Сеточный";
+            this.checkBox.UseVisualStyleBackColor = true;
+            this.checkBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // trackBar1
+            // oxScroll
             // 
-            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.oxScroll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar1.LargeChange = 1;
-            this.trackBar1.Location = new System.Drawing.Point(661, 164);
-            this.trackBar1.Maximum = 359;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 294);
-            this.trackBar1.TabIndex = 6;
+            this.oxScroll.LargeChange = 1;
+            this.oxScroll.Location = new System.Drawing.Point(661, 164);
+            this.oxScroll.Maximum = 359;
+            this.oxScroll.Name = "oxScroll";
+            this.oxScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.oxScroll.Size = new System.Drawing.Size(45, 294);
+            this.oxScroll.TabIndex = 6;
+            this.oxScroll.Scroll += new System.EventHandler(this.OxScrollChanged);
             // 
-            // trackBar2
+            // zoomScroll
             // 
-            this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.zoomScroll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar2.LargeChange = 1;
-            this.trackBar2.Location = new System.Drawing.Point(865, 164);
-            this.trackBar2.Minimum = -10;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 294);
-            this.trackBar2.TabIndex = 7;
+            this.zoomScroll.LargeChange = 1;
+            this.zoomScroll.Location = new System.Drawing.Point(865, 164);
+            this.zoomScroll.Minimum = -10;
+            this.zoomScroll.Name = "zoomScroll";
+            this.zoomScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.zoomScroll.Size = new System.Drawing.Size(45, 294);
+            this.zoomScroll.TabIndex = 7;
+            this.zoomScroll.Scroll += new System.EventHandler(this.zoomScroll_Scroll);
             // 
-            // trackBar3
+            // angleScroll
             // 
-            this.trackBar3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.angleScroll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar3.LargeChange = 1;
-            this.trackBar3.Location = new System.Drawing.Point(814, 164);
-            this.trackBar3.Maximum = 359;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar3.Size = new System.Drawing.Size(45, 294);
-            this.trackBar3.TabIndex = 8;
+            this.angleScroll.LargeChange = 1;
+            this.angleScroll.Location = new System.Drawing.Point(814, 164);
+            this.angleScroll.Maximum = 359;
+            this.angleScroll.Name = "angleScroll";
+            this.angleScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.angleScroll.Size = new System.Drawing.Size(45, 294);
+            this.angleScroll.TabIndex = 8;
             // 
-            // trackBar4
+            // ozScroll
             // 
-            this.trackBar4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ozScroll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar4.LargeChange = 1;
-            this.trackBar4.Location = new System.Drawing.Point(763, 164);
-            this.trackBar4.Maximum = 359;
-            this.trackBar4.Name = "trackBar4";
-            this.trackBar4.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar4.Size = new System.Drawing.Size(45, 294);
-            this.trackBar4.TabIndex = 9;
+            this.ozScroll.LargeChange = 1;
+            this.ozScroll.Location = new System.Drawing.Point(763, 164);
+            this.ozScroll.Maximum = 359;
+            this.ozScroll.Name = "ozScroll";
+            this.ozScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.ozScroll.Size = new System.Drawing.Size(45, 294);
+            this.ozScroll.TabIndex = 9;
+            this.ozScroll.Scroll += new System.EventHandler(this.ozScroll_Scroll);
             // 
-            // trackBar5
+            // oyScroll
             // 
-            this.trackBar5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.oyScroll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar5.LargeChange = 1;
-            this.trackBar5.Location = new System.Drawing.Point(712, 164);
-            this.trackBar5.Maximum = 359;
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar5.Size = new System.Drawing.Size(45, 294);
-            this.trackBar5.TabIndex = 10;
+            this.oyScroll.LargeChange = 1;
+            this.oyScroll.Location = new System.Drawing.Point(712, 164);
+            this.oyScroll.Maximum = 359;
+            this.oyScroll.Name = "oyScroll";
+            this.oyScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.oyScroll.Size = new System.Drawing.Size(45, 294);
+            this.oyScroll.TabIndex = 10;
+            this.oyScroll.Scroll += new System.EventHandler(this.OyScrollChanged);
             // 
             // label3
             // 
@@ -236,7 +227,22 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "X";
             // 
-            // Form1
+            // openGLControl
+            // 
+            this.openGLControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.openGLControl.DrawFPS = false;
+            this.openGLControl.Location = new System.Drawing.Point(12, 12);
+            this.openGLControl.Name = "openGLControl";
+            this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
+            this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
+            this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
+            this.openGLControl.Size = new System.Drawing.Size(643, 457);
+            this.openGLControl.TabIndex = 0;
+            this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl1_OpenGLDraw);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -246,48 +252,47 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.trackBar5);
-            this.Controls.Add(this.trackBar4);
-            this.Controls.Add(this.trackBar3);
-            this.Controls.Add(this.trackBar2);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.oyScroll);
+            this.Controls.Add(this.ozScroll);
+            this.Controls.Add(this.angleScroll);
+            this.Controls.Add(this.zoomScroll);
+            this.Controls.Add(this.oxScroll);
+            this.Controls.Add(this.checkBox);
+            this.Controls.Add(this.objectsComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.openGLControl);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.oxScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.angleScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ozScroll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.oyScroll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private SharpGL.OpenGLControl openGLControl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox objectsComboBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.TrackBar trackBar3;
-        private System.Windows.Forms.TrackBar trackBar4;
-        private System.Windows.Forms.TrackBar trackBar5;
+        private System.Windows.Forms.CheckBox checkBox;
+        private System.Windows.Forms.TrackBar oxScroll;
+        private System.Windows.Forms.TrackBar zoomScroll;
+        private System.Windows.Forms.TrackBar angleScroll;
+        private System.Windows.Forms.TrackBar ozScroll;
+        private System.Windows.Forms.TrackBar oyScroll;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private SharpGL.OpenGLControl openGLControl;
     }
 }
 
