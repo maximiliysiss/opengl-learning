@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.rotateComboBox = new System.Windows.Forms.ComboBox();
             this.objectsComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox = new System.Windows.Forms.CheckBox();
@@ -63,15 +63,20 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "По оси";
             // 
-            // comboBox1
+            // rotateComboBox
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rotateComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(662, 29);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(163, 21);
-            this.comboBox1.TabIndex = 2;
+            this.rotateComboBox.FormattingEnabled = true;
+            this.rotateComboBox.Items.AddRange(new object[] {
+            "Вращать вдоль Ox",
+            "Вращать вдоль Oy",
+            "Вращать вдоль Oz"});
+            this.rotateComboBox.Location = new System.Drawing.Point(662, 29);
+            this.rotateComboBox.Name = "rotateComboBox";
+            this.rotateComboBox.Size = new System.Drawing.Size(163, 21);
+            this.rotateComboBox.TabIndex = 2;
+            this.rotateComboBox.SelectedIndexChanged += new System.EventHandler(this.rotateComboBox_SelectedIndexChanged);
             // 
             // objectsComboBox
             // 
@@ -95,18 +100,18 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Объект";
             // 
-            // checkBox1
+            // checkBox
             // 
             this.checkBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox.AutoSize = true;
             this.checkBox.Location = new System.Drawing.Point(661, 108);
-            this.checkBox.Name = "checkBox1";
+            this.checkBox.Name = "checkBox";
             this.checkBox.Size = new System.Drawing.Size(75, 17);
             this.checkBox.TabIndex = 5;
             this.checkBox.Text = "Сеточный";
             this.checkBox.UseVisualStyleBackColor = true;
-            this.checkBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
             // oxScroll
             // 
@@ -145,6 +150,7 @@
             this.angleScroll.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.angleScroll.Size = new System.Drawing.Size(45, 294);
             this.angleScroll.TabIndex = 8;
+            this.angleScroll.Scroll += new System.EventHandler(this.angleScroll_Scroll);
             // 
             // ozScroll
             // 
@@ -260,7 +266,7 @@
             this.Controls.Add(this.checkBox);
             this.Controls.Add(this.objectsComboBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.rotateComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.openGLControl);
             this.Name = "MainForm";
@@ -278,7 +284,7 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox rotateComboBox;
         private System.Windows.Forms.ComboBox objectsComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox;
