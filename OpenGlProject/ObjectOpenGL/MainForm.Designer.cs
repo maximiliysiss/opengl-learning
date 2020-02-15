@@ -38,7 +38,6 @@
             this.angleScroll = new System.Windows.Forms.TrackBar();
             this.zoomScroll = new System.Windows.Forms.TrackBar();
             this.oxScroll = new System.Windows.Forms.TrackBar();
-            this.checkBox = new System.Windows.Forms.CheckBox();
             this.rotateComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.openGLControl = new SharpGL.OpenGLControl();
@@ -170,19 +169,6 @@
             this.oxScroll.TabIndex = 22;
             this.oxScroll.Scroll += new System.EventHandler(this.OxScrollChanged);
             // 
-            // checkBox
-            // 
-            this.checkBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox.AutoSize = true;
-            this.checkBox.Location = new System.Drawing.Point(674, 108);
-            this.checkBox.Name = "checkBox";
-            this.checkBox.Size = new System.Drawing.Size(75, 17);
-            this.checkBox.TabIndex = 21;
-            this.checkBox.Text = "Сеточный";
-            this.checkBox.UseVisualStyleBackColor = true;
-            this.checkBox.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
-            // 
             // rotateComboBox
             // 
             this.rotateComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -218,10 +204,11 @@
             this.openGLControl.Location = new System.Drawing.Point(25, 12);
             this.openGLControl.Name = "openGLControl";
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
-            this.openGLControl.RenderContextType = SharpGL.RenderContextType.DIBSection;
+            this.openGLControl.RenderContextType = SharpGL.RenderContextType.FBO;
             this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
             this.openGLControl.Size = new System.Drawing.Size(643, 457);
             this.openGLControl.TabIndex = 16;
+            this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl1_OpenGLDraw);
             // 
             // MainForm
@@ -239,7 +226,6 @@
             this.Controls.Add(this.angleScroll);
             this.Controls.Add(this.zoomScroll);
             this.Controls.Add(this.oxScroll);
-            this.Controls.Add(this.checkBox);
             this.Controls.Add(this.rotateComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.openGLControl);
@@ -268,7 +254,6 @@
         private System.Windows.Forms.TrackBar angleScroll;
         private System.Windows.Forms.TrackBar zoomScroll;
         private System.Windows.Forms.TrackBar oxScroll;
-        private System.Windows.Forms.CheckBox checkBox;
         private System.Windows.Forms.ComboBox rotateComboBox;
         private System.Windows.Forms.Label label1;
         private SharpGL.OpenGLControl openGLControl;
