@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditorOpenGl", "EditorOpenG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureOpenGL", "TextureOpenGL\TextureOpenGL.csproj", "{A5D4313A-B7EB-4020-9BB5-79D81CEAE02C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectOpenGL", "ObjectOpenGL\ObjectOpenGL.csproj", "{C1EC7B24-299B-412B-A07E-13C0A92CCDF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParicalsOpenGl", "ParicalsOpenGl\ParicalsOpenGl.csproj", "{2C1CB94B-29D8-4C04-BAA4-297A2D2153A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{A5D4313A-B7EB-4020-9BB5-79D81CEAE02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D4313A-B7EB-4020-9BB5-79D81CEAE02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D4313A-B7EB-4020-9BB5-79D81CEAE02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1EC7B24-299B-412B-A07E-13C0A92CCDF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1EC7B24-299B-412B-A07E-13C0A92CCDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1EC7B24-299B-412B-A07E-13C0A92CCDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1EC7B24-299B-412B-A07E-13C0A92CCDF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C1CB94B-29D8-4C04-BAA4-297A2D2153A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C1CB94B-29D8-4C04-BAA4-297A2D2153A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C1CB94B-29D8-4C04-BAA4-297A2D2153A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C1CB94B-29D8-4C04-BAA4-297A2D2153A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
