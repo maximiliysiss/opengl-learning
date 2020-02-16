@@ -1,9 +1,7 @@
-﻿using FileFormatWavefront.Model;
-using GlmNet;
+﻿using GlmNet;
 using SharpGL;
 using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -43,36 +41,19 @@ namespace ObjectOpenGL
         }
 
         /// <summary>
-        /// Creates the projection matrix for the given screen size.
-        /// </summary>
-        /// <param name="screenWidth">Width of the screen.</param>
-        /// <param name="screenHeight">Height of the screen.</param>
-        public void CreateProjectionMatrix(float screenWidth, float screenHeight)
-        {
-            //  Create the projection matrix for our screen size.
-            const float S = 0.46f;
-            float H = S * screenHeight / screenWidth;
-            projectionMatrix = glm.frustum(-S, S, -H, H, 1, 100);
-        }
-
-        /// <summary>
         /// Creates the modelview and normal matrix. Also rotates the sceen by a specified amount.
         /// </summary>
         /// <param name="rotationAngle">The rotation angle, in radians.</param>
         public void CreateModelviewAndNormalMatrix()
         {
+            float scaleFactor = 1.0f;
             //  Create the modelview and normal matrix. We'll also rotate the scene
             //  by the provided rotation angle, which means things that draw it 
             //  can make the scene rotate easily.
-            mat4 translation = glm.translate(mat4.identity(), new vec3(0, -2, -10 + zoom));
+            mat4 translation = glm.translate(mat4.identity(), new vec3(0, -2, -10));
             mat4 rotation = mat4.identity();
-            rotation = glm.rotate(rotation, rotatePosition.Item1, new vec3(1, 0, 0));
-            rotation = glm.rotate(rotation, rotatePosition.Item2, new vec3(0, 1, 0));
-            rotation = glm.rotate(rotation, rotatePosition.Item3, new vec3(0, 0, 1));
-            rotation = glm.rotate(rotation, angle, new vec3((int)rotateOs & 2, (int)rotateOs & 4, (int)rotateOs & 8));
             mat4 scale = glm.scale(mat4.identity(), new vec3(scaleFactor, scaleFactor, scaleFactor));
             modelviewMatrix = scale * rotation * translation;
-            normalMatrix = modelviewMatrix.to_mat3();
         }
 
         /// <summary>
@@ -85,6 +66,13 @@ namespace ObjectOpenGL
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
             gl.LoadIdentity();
             gl.MultMatrix(modelviewMatrix.to_array());
+
+            gl.Translate(0, 0, zoom);
+            gl.Rotate(rotatePosition.Item1, 1, 0, 0);
+            gl.Rotate(rotatePosition.Item2, 0, 1, 0);
+            gl.Rotate(rotatePosition.Item3, 0, 0, 1);
+
+            gl.Rotate(angle, (int)rotateOs & 2, (int)rotateOs & 4, (int)rotateOs & 8);
 
             //  Go through each group.
             foreach (var mesh in meshes)
@@ -136,10 +124,6 @@ namespace ObjectOpenGL
 
             //  Create textures for each texture map.
             CreateTextures(gl, meshes);
-
-            //  TODO: handle errors and warnings.
-
-            //  TODO: cleanup
 
         }
 
@@ -199,53 +183,6 @@ namespace ObjectOpenGL
             }
         }
 
-        /// <summary>
-        /// Sets the scale factor automatically based on the size of the geometry.
-        /// Returns the computed scale factor.
-        /// </summary>
-        /// <returns>The computed scale factor.</returns>
-        public float SetScaleFactorAuto()
-        {
-            //  0.02 good for inet models.
-
-            //  If we have no meshes, just use 1.0f.
-            if (!meshes.Any())
-            {
-                scaleFactor = 1.0f;
-                return scaleFactor;
-            }
-
-            //  Find the maximum vertex value.
-            var maxX = meshes.SelectMany(m => m.vertices).AsParallel().Max(v => Math.Abs(v.x));
-            var maxY = meshes.SelectMany(m => m.vertices).AsParallel().Max(v => Math.Abs(v.y));
-            var maxZ = meshes.SelectMany(m => m.vertices).AsParallel().Max(v => Math.Abs(v.z));
-            var max = (new[] { maxX, maxY, maxZ }).Max();
-
-            //  Set the scale factor accordingly.
-            //  sf = max/c
-            scaleFactor = 8.0f / max;
-            return scaleFactor;
-        }
-
-        /// <summary>
-        /// Gets or sets the scale factor.
-        /// </summary>
-        public float ScaleFactor
-        {
-            get { return scaleFactor; }
-            set { scaleFactor = value; }
-        }
-
-        /// <summary>
-        /// Gets the projection matrix.
-        /// </summary>
-        public mat4 ProjectionMatrix
-        {
-            get { return projectionMatrix; }
-        }
-
-        private readonly Material defaultMaterial;
-
         private readonly List<Mesh> meshes = new List<Mesh>();
         private readonly Dictionary<Mesh, VertexBufferArray> meshVertexBufferArrays = new Dictionary<Mesh, VertexBufferArray>();
         private readonly Dictionary<Mesh, Texture2D> meshTextures = new Dictionary<Mesh, Texture2D>();
@@ -255,9 +192,5 @@ namespace ObjectOpenGL
 
         //  The modelview, projection and normal matrices.
         private mat4 modelviewMatrix = mat4.identity();
-        private mat4 projectionMatrix = mat4.identity();
-        private mat3 normalMatrix = mat3.identity();
-
-        private float scaleFactor = 1.0f;
     }
 }

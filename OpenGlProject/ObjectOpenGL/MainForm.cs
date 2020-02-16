@@ -1,6 +1,5 @@
 ﻿using SharpGL;
 using SharpGL.Enumerations;
-using SharpGL.SceneGraph.Quadrics;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -45,17 +44,17 @@ namespace ObjectOpenGL
             scene.RenderImmediateMode(gl);
         }
 
-        private void OxScrollChanged(object sender, System.EventArgs e) => scene.rotatePosition.Item1 = (float)oxScroll.Value / 50;
+        private void OxScrollChanged(object sender, System.EventArgs e) => scene.rotatePosition.Item1 = oxScroll.Value;
 
-        private void OyScrollChanged(object sender, System.EventArgs e) => scene.rotatePosition.Item2 = (float)oyScroll.Value / 50;
+        private void OyScrollChanged(object sender, System.EventArgs e) => scene.rotatePosition.Item2 = oyScroll.Value;
 
-        private void ozScroll_Scroll(object sender, System.EventArgs e) => scene.rotatePosition.Item3 = (float)ozScroll.Value / 50;
+        private void ozScroll_Scroll(object sender, System.EventArgs e) => scene.rotatePosition.Item3 = ozScroll.Value;
 
         private void zoomScroll_Scroll(object sender, System.EventArgs e) => scene.zoom = zoomScroll.Value;
 
         private void rotateComboBox_SelectedIndexChanged(object sender, System.EventArgs e) => scene.rotateOs = (RotateOs)Math.Pow(2, rotateComboBox.SelectedIndex + 1);
 
-        private void angleScroll_Scroll(object sender, System.EventArgs e) => scene.angle = (float)angleScroll.Value / 50;
+        private void angleScroll_Scroll(object sender, System.EventArgs e) => scene.angle = angleScroll.Value;
 
         private void openGLControl_OpenGLInitialized(object sender, EventArgs e)
         {
