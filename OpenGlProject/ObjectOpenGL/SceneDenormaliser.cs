@@ -71,8 +71,7 @@ namespace ObjectOpenGL
         public vec3[] vertices;
         public vec3[] normals;
         public vec2[] uvs;
-        public uint[] indices;
         public int indicesPerFace;
-        public FileFormatWavefront.Model.Material material;
+        public Material material;
     }
 }

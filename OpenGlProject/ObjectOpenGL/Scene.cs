@@ -1,20 +1,11 @@
 ﻿using GlmNet;
 using SharpGL;
-using SharpGL.Shaders;
-using SharpGL.VertexBuffers;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
 namespace ObjectOpenGL
 {
-    public static class VertexAttributes
-    {
-        public const uint Position = 0;
-        public const uint Normal = 1;
-        public const uint TexCoord = 2;
-    }
-
     /// <summary>
     /// A class that represents the scene for this sample.
     /// </summary>
@@ -27,16 +18,7 @@ namespace ObjectOpenGL
 
         public void Initialise(OpenGL gl)
         {
-            //  Create the per pixel shader.
-            shaderPerPixel = new ShaderProgram();
-            shaderPerPixel.Create(gl,
-                ManifestResourceLoader.LoadTextFile(@"Shaders\PerPixel.vert"),
-                ManifestResourceLoader.LoadTextFile(@"Shaders\PerPixel.frag"), null);
-            shaderPerPixel.BindAttributeLocation(gl, VertexAttributes.Position, "Position");
-            shaderPerPixel.BindAttributeLocation(gl, VertexAttributes.Normal, "Normal");
             gl.ClearColor(0f, 0f, 0f, 1f);
-
-            //  Immediate mode only features!
             gl.Enable(OpenGL.GL_TEXTURE_2D);
         }
 
@@ -47,9 +29,6 @@ namespace ObjectOpenGL
         public void CreateModelviewAndNormalMatrix()
         {
             float scaleFactor = 1.0f;
-            //  Create the modelview and normal matrix. We'll also rotate the scene
-            //  by the provided rotation angle, which means things that draw it 
-            //  can make the scene rotate easily.
             mat4 translation = glm.translate(mat4.identity(), new vec3(0, -2, -10));
             mat4 rotation = mat4.identity();
             mat4 scale = glm.scale(mat4.identity(), new vec3(scaleFactor, scaleFactor, scaleFactor));
@@ -106,63 +85,12 @@ namespace ObjectOpenGL
 
         public void Load(OpenGL gl, string objectFilePath)
         {
-            //  TODO: cleanup old files.
-
-            //  Destroy all of the vertex buffer arrays in the meshes.
-            foreach (var vertexBufferArray in meshVertexBufferArrays.Values)
-                vertexBufferArray.Delete(gl);
             meshes.Clear();
-            meshVertexBufferArrays.Clear();
-
             //  Load the object file.
             var result = FileFormatWavefront.FileFormatObj.Load(objectFilePath, true);
-
             meshes.AddRange(SceneDenormaliser.Denormalize(result.Model));
-
-            //  Create a vertex buffer array for each mesh.
-            meshes.ForEach(m => CreateVertexBufferArray(gl, m));
-
             //  Create textures for each texture map.
             CreateTextures(gl, meshes);
-
-        }
-
-        private void CreateVertexBufferArray(OpenGL gl, Mesh mesh)
-        {
-            //  Create and bind a vertex buffer array.
-            var vertexBufferArray = new VertexBufferArray();
-            vertexBufferArray.Create(gl);
-            vertexBufferArray.Bind(gl);
-
-            //  Create a vertex buffer for the vertices.
-            var verticesVertexBuffer = new VertexBuffer();
-            verticesVertexBuffer.Create(gl);
-            verticesVertexBuffer.Bind(gl);
-            verticesVertexBuffer.SetData(gl, VertexAttributes.Position,
-                                 mesh.vertices.SelectMany(v => v.to_array()).ToArray(),
-                                 false, 3);
-            if (mesh.normals != null)
-            {
-                var normalsVertexBuffer = new VertexBuffer();
-                normalsVertexBuffer.Create(gl);
-                normalsVertexBuffer.Bind(gl);
-                normalsVertexBuffer.SetData(gl, VertexAttributes.Normal,
-                                            mesh.normals.SelectMany(v => v.to_array()).ToArray(),
-                                            false, 3);
-            }
-
-            if (mesh.uvs != null)
-            {
-                var texCoordsVertexBuffer = new VertexBuffer();
-                texCoordsVertexBuffer.Create(gl);
-                texCoordsVertexBuffer.Bind(gl);
-                texCoordsVertexBuffer.SetData(gl, VertexAttributes.TexCoord,
-                                              mesh.uvs.SelectMany(v => v.to_array()).ToArray(),
-                                              false, 2);
-            }
-            //  We're done creating the vertex buffer array - unbind it and add it to the dictionary.
-            verticesVertexBuffer.Unbind(gl);
-            meshVertexBufferArrays[mesh] = vertexBufferArray;
         }
 
         private void CreateTextures(OpenGL gl, IEnumerable<Mesh> meshes)
@@ -184,12 +112,7 @@ namespace ObjectOpenGL
         }
 
         private readonly List<Mesh> meshes = new List<Mesh>();
-        private readonly Dictionary<Mesh, VertexBufferArray> meshVertexBufferArrays = new Dictionary<Mesh, VertexBufferArray>();
         private readonly Dictionary<Mesh, Texture2D> meshTextures = new Dictionary<Mesh, Texture2D>();
-
-        //  The shaders we use.
-        private ShaderProgram shaderPerPixel;
-
         //  The modelview, projection and normal matrices.
         private mat4 modelviewMatrix = mat4.identity();
     }
