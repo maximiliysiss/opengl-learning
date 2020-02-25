@@ -20,6 +20,7 @@ namespace ObjectOpenGL
         {
             InitializeComponent();
             rotateComboBox.SelectedIndex = 0;
+            this.Text = "ПРИ-116-ПКГ-#14-ЗИМИН";
 
 #if DEBUG
             openGLControl.DrawFPS = true;
@@ -28,8 +29,6 @@ namespace ObjectOpenGL
 
         private void openGLControl1_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
         {
-            //Parallel.ForEach(scene.SceneContainer.Children.OfType<Quadric>(), x => x.QuadricDrawStyle = drawStyle);
-
             OpenGL gl = this.openGLControl.OpenGL;
 
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
